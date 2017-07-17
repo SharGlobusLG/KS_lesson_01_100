@@ -9,7 +9,12 @@
     <string name="Act1_etHint">enter e-mail adress</string>
     <string name="Act1_chEnable">Enable</string>
 
-    <string name="Act_btClear">Clear</string>
-    <string name="Act_btSend">Send</string>
+    <string name="Act1_btClear">Clear</string>
+    <string name="Act1_btSend">Send</string>
+
+
+    <string name="Act2_Caption">E-mail:</string>
+    <string name="Act2_btOk">Ok</string>
+    <string name="Act2_btCancel">Cancel</string>
 
 </resources>
