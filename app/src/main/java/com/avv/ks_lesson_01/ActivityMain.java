@@ -32,9 +32,9 @@ public class ActivityMain extends Activity implements View.OnClickListener{
             StringBuilder msgText  =new StringBuilder("CntApp and CntBase is ");
 
             if ( cntApp != null && cntBase != null && cntApp.equals(cntBase)){
-                msgText.append(" equal");
+                msgText.append("equal");
             }else {
-                msgText.append(" NOT equal");
+                msgText.append("NOT equal");
             }
 
             Toast.makeText(cntApp,msgText.toString(),Toast.LENGTH_SHORT).show();
