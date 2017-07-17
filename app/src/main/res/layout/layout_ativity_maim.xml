@@ -42,5 +42,69 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"/>
 
+    <TextView
+        android:id="@+id/tvL3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:width="1dp"
+        android:gravity="left"
+        android:text="@string/Act1_Caption_Les3"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/et_Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+
+        android:inputType="textEmailAddress"
+        android:hint="@string/Act1_etHint"
+        />
+
+    <CheckBox
+        android:id="@+id/cb_Enable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CheckBox" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        >
+
+        <Button
+            android:id="@+id/bt_Clear"
+
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+            android:layout_weight="1"
+            android:text="@string/Act_btClear" />
+
+        <Button
+            android:id="@+id/bt_Send"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+            android:text="@string/Act_btSend" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

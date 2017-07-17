@@ -2,7 +2,14 @@
     <string name="app_name">KS_lesson_01</string>
     <string name="Act1_Caption_KS">Keep Solid - hello word !</string>
     <string name="Act1_Caption_Les1">Lesson 01</string>
+    
     <string name="Act_btToast">Show TOAST</string>
+    
+    <string name="Act1_Caption_Les3">Lesson 03</string>
+    <string name="Act1_etHint">enter e-mail adress</string>
+    <string name="Act1_chEnable">Enable</string>
 
+    <string name="Act_btClear">Clear</string>
+    <string name="Act_btSend">Send</string>
 
 </resources>
