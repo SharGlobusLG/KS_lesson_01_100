@@ -27,7 +27,7 @@
 
     <Button
         android:id="@+id/bt_ShowToast"
-                android:layout_width="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginLeft="5dp"
@@ -71,7 +71,7 @@
         android:id="@+id/cb_Enable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CheckBox" />
+        android:text="@string/Act1_chEnable" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,13 +84,10 @@
 
         <Button
             android:id="@+id/bt_Clear"
-
             android:layout_height="wrap_content"
             android:layout_width="0dp"
-
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-
             android:layout_weight="1"
             android:text="@string/Act1_btClear" />
 

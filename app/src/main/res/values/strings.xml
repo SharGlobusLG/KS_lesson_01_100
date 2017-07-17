@@ -7,7 +7,7 @@
     
     <string name="Act1_Caption_Les3">Lesson 03</string>
     <string name="Act1_etHint">enter e-mail adress</string>
-    <string name="Act1_chEnable">Enable</string>
+    <string name="Act1_chEnable">Enable send E-mail</string>
 
     <string name="Act1_btClear">Clear</string>
     <string name="Act1_btSend">Send</string>

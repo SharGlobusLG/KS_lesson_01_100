@@ -2,6 +2,7 @@ package com.avv.ks_lesson_01;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 
 public class ActivityMain extends Activity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+    public static final String KEY_EMAIL = "key_email";
     private Button bt_ShowToast;
     private Button bt_Clear;
     private Button bt_Send;
@@ -42,6 +44,31 @@ public class ActivityMain extends Activity implements View.OnClickListener, Comp
     }
 
     @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String temp = savedInstanceState.getString(KEY_EMAIL);
+        if (! temp.isEmpty() )
+            et_Email.setText( temp );
+
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(KEY_EMAIL,et_Email.getText().toString());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK)
+            et_Email.getText().clear();
+        if (resultCode == RESULT_CANCELED )
+            showToast_lesson_03("Canceled !");
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_ShowToast:
@@ -53,10 +80,8 @@ public class ActivityMain extends Activity implements View.OnClickListener, Comp
             case R.id.bt_Send:
                 send();
                 break;
-
         }
     }
-
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -65,11 +90,17 @@ public class ActivityMain extends Activity implements View.OnClickListener, Comp
 
     private void send(){
         String email = et_Email.getText().toString();
-        if (email.isEmpty() || email.length() <= 5 ||email.indexOf("@")==0 || email.indexOf(".")==0) {
+
+        if (email.isEmpty() || email.length() < 5 ||email.indexOf("@")<0 || email.indexOf(".")<0) {
             showToast_lesson_03("Bad email");
             return;
         }
 
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(),ActivityConfirm.class);
+        intent.putExtra(KEY_EMAIL,email);
+
+        startActivityForResult(intent,0);
 
     }
     private void showToast_lesson_03(String msg){
