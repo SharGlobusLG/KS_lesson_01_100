@@ -29,12 +29,17 @@ public class ActivityMain extends Activity implements View.OnClickListener{
 
             Context cntApp = getApplicationContext();
             Context cntBase = getBaseContext();
-            StringBuilder msgText  =new StringBuilder("CntApp and CntBase is ");
+            StringBuilder msgText  =new StringBuilder("CntApp and CntBase is: ");
 
-            if ( cntApp != null && cntBase != null && cntApp.equals(cntBase)){
-                msgText.append(" equal");
+            if ( cntApp != null && cntBase != null ){
+                if (cntApp.equals(cntBase) || cntApp == cntBase ){
+                    msgText.append(" equal");
+                }else{
+                    msgText.append(" NOT equal");
+                }
+
             }else {
-                msgText.append(" NOT equal");
+                msgText.append(" NULL !");
             }
 
             Toast.makeText(cntApp,msgText.toString(),Toast.LENGTH_SHORT).show();
