@@ -6,5 +6,6 @@
 .DS_Store
 /build
 !/app/build/outputs/apk/app-debug.apk
+!\app\build\outputs\apk\app-debug.apk
 /captures
 .externalNativeBuild
