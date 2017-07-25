@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.avv.ks_lesson_01.OnFragmentNotify;
 import com.avv.ks_lesson_01.R;
 
 /**
@@ -15,7 +16,9 @@ import com.avv.ks_lesson_01.R;
  */
 
 public class FragmentCancel extends Fragment implements View.OnClickListener{
-    Button btCancel;
+    private Button btCancel;
+    private OnFragmentNotify callBack;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -25,13 +28,16 @@ public class FragmentCancel extends Fragment implements View.OnClickListener{
 
         btCancel = (Button) viewFragment.findViewById(R.id.bt_Ok);
         btCancel.setOnClickListener(this);
-
-
-        return viewFragment;
+    return viewFragment;
     }
 
     @Override
     public void onClick(View view) {
+        if (callBack!=null)
+            callBack.onFragmentClosed();
+    }
 
+    public void setOnOnFragmentNotifyListener(OnFragmentNotify callBack) {
+        this.callBack = callBack;
     }
 }

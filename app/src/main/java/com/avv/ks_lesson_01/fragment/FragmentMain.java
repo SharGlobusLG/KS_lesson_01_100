@@ -12,17 +12,18 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.avv.ks_lesson_01.ActivityMain;
+import com.avv.ks_lesson_01.OnFragmentNotify;
 import com.avv.ks_lesson_01.R;
 
 
-public class FragmentMain extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class FragmentMain extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
 
+    private OnFragmentNotify  callBack;
 
-    private Button bt_Clear;
-    private Button bt_Send;
-    private CheckBox cb_Enable;
-    private EditText et_Email;
-
+    private Button btClear;
+    private Button btSend;
+    private CheckBox cbEnable;
+    private EditText etEmail;
 
 
     @Nullable
@@ -32,17 +33,19 @@ public class FragmentMain extends Fragment implements View.OnClickListener, Comp
 
         View viewFragment = inflater.inflate(R.layout.layout_fragment_send_message,null);
 
-        bt_Clear = (Button) viewFragment.findViewById(R.id.bt_Clear);
-        bt_Clear.setOnClickListener(this);
+        btClear = (Button) viewFragment.findViewById(R.id.bt_Clear);
+        btClear.setOnClickListener(this);
 
-        bt_Send = (Button) viewFragment.findViewById(R.id.bt_Send);
-        bt_Send.setOnClickListener(this);
-        bt_Send.setEnabled(false);
+        btSend = (Button) viewFragment.findViewById(R.id.bt_Send);
+        btSend.setOnClickListener(this);
+        btSend.setEnabled(false);
 
-        cb_Enable = (CheckBox) viewFragment.findViewById(R.id.cb_Enable);
-        cb_Enable.setOnCheckedChangeListener(this);
+        cbEnable = (CheckBox) viewFragment.findViewById(R.id.cb_Enable);
+        cbEnable.setOnCheckedChangeListener(this);
 
-        et_Email = (EditText) viewFragment.findViewById(R.id.et_Email);
+        etEmail = (EditText) viewFragment.findViewById(R.id.et_Email);
+
+
 
         return viewFragment;
     }
@@ -50,24 +53,40 @@ public class FragmentMain extends Fragment implements View.OnClickListener, Comp
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(ActivityMain.KEY_EMAIL,et_Email.getText().toString());
+        outState.putString(ActivityMain.KEY_EMAIL, etEmail.getText().toString());
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_Clear:
-                et_Email.getText().clear();
+                etEmail.getText().clear();
                 break;
             case R.id.bt_Send:
-                //send();
+                if ( callBack != null )
+                    callBack.onFragmentAction( etEmail.getText().toString() );
                 break;
         }
     }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        bt_Send.setEnabled(b);
+        btSend.setEnabled(b);
+    }
+
+    public void setOnFragmentNotify(OnFragmentNotify callBack) {
+        this.callBack = callBack;
+    }
+
+
+    public void  doSendDisaible(){
+        cbEnable.setPressed(false);
+        btSend.setEnabled(false);
+    }
+
+
+    public void clearEmail(){
+        etEmail.getText().clear();
     }
 
 }

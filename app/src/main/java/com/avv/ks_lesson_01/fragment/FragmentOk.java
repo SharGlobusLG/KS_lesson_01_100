@@ -7,9 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 
+import com.avv.ks_lesson_01.OnFragmentNotify;
 import com.avv.ks_lesson_01.R;
 
 /**
@@ -17,7 +16,10 @@ import com.avv.ks_lesson_01.R;
  */
 
 public class FragmentOk extends Fragment implements View.OnClickListener{
-    Button btOk;
+    private Button btOk;
+    private OnFragmentNotify callBack;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -27,13 +29,17 @@ public class FragmentOk extends Fragment implements View.OnClickListener{
 
         btOk = (Button) viewFragment.findViewById(R.id.bt_Ok);
         btOk.setOnClickListener(this);
-
-
         return viewFragment;
     }
 
     @Override
     public void onClick(View view) {
+        if (callBack!=null)
+            callBack.onFragmentClosed();
 
+    }
+
+    public void setOnOnFragmentNotifyListenet(OnFragmentNotify callBack) {
+        this.callBack = callBack;
     }
 }

@@ -21,22 +21,22 @@ public class ActivityConfirm extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layuot_activity_confirm);
 
-        Button bt_Ok = (Button) findViewById(R.id.bt_Ok);
-        bt_Ok.setOnClickListener(this);
+        Button btOk = (Button) findViewById(R.id.bt_Ok);
+        btOk.setOnClickListener(this);
 
-        Button bt_Cancel = (Button) findViewById(R.id.bt_Cancel);
-        bt_Cancel.setOnClickListener(this);
+        Button btCancel = (Button) findViewById(R.id.bt_Cancel);
+        btCancel.setOnClickListener(this);
 
-        TextView tv_Email = (TextView) findViewById(R.id.tv_Email);
-        tv_Email.setText("no email");
+        TextView tvEmail = (TextView) findViewById(R.id.tv_Email);
+        tvEmail.setText("no email");
 
         Intent intent= getIntent();
         if ( intent != null) {
             email = intent.getExtras().get(ActivityMain.KEY_EMAIL).toString();
-            tv_Email.setText(email);
+            tvEmail.setText(email);
 
         } else
-            bt_Ok.setEnabled(false);
+            btOk.setEnabled(false);
 
     }
 
@@ -50,7 +50,7 @@ public class ActivityConfirm extends Activity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.bt_Cancel:
-
+                Toast.makeText(getApplicationContext(), "Email canceled", Toast.LENGTH_SHORT).show();
                 setResult(RESULT_CANCELED,intent);
                 finish();
                 break;

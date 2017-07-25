@@ -2,43 +2,50 @@ package com.avv.ks_lesson_01;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.avv.ks_lesson_01.fragment.FragmentCancel;
 import com.avv.ks_lesson_01.fragment.FragmentMain;
+import com.avv.ks_lesson_01.fragment.FragmentOk;
 
 
-public class ActivityMain extends Activity implements View.OnClickListener{
+public class ActivityMain extends Activity implements View.OnClickListener,OnFragmentNotify {
 
     public static final String KEY_EMAIL = "key_email";
 
     private Button btShowToast;
-    private FrameLayout flFragmentCont;
 
-    private Fragment frMain;
-    private Fragment frJr;
-    private Fragment frCancel;
 
+    private FragmentMain frMain;
+    private FragmentOk frOk;
+    private FragmentCancel frCancel;
+    private Fragment frCurrent = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_ativity_maim);
 
-
         btShowToast = (Button) findViewById(R.id.bt_ShowToast);
         btShowToast.setOnClickListener(this);
 
-        flFragmentCont = (FrameLayout)findViewById(R.id.fl_FragmentCont);
-
         frMain = new FragmentMain();
+        frMain.setOnFragmentNotify(this);
 
+        frOk = new FragmentOk();
+        frOk.setOnOnFragmentNotifyListenet(this);
+
+        frCancel = new FragmentCancel();
+        frCancel.setOnOnFragmentNotifyListener(this);
+
+        setFragment(frMain);
     }
 
 
@@ -47,9 +54,12 @@ public class ActivityMain extends Activity implements View.OnClickListener{
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK)
            // et_Email.getText().clear();
+            setFragment(frOk);
         if (resultCode == RESULT_CANCELED )
-            showToast("Canceled !");
+           // showToast("Canceled !");
+            setFragment(frCancel);
     }
+
 
     @Override
     public void onClick(View view) {
@@ -57,15 +67,8 @@ public class ActivityMain extends Activity implements View.OnClickListener{
             case R.id.bt_ShowToast:
                 showToastCompareContext();
                 break;
-            case R.id.bt_Clear:
-               // et_Email.getText().clear();
-                break;
-            case R.id.bt_Send:
-                sendEmail("");
-                break;
         }
     }
-
 
     public void sendEmail(String email){
         if (email.isEmpty() || email.length() < 5 ||email.indexOf("@")<0 || email.indexOf(".")<0) {
@@ -97,5 +100,40 @@ public class ActivityMain extends Activity implements View.OnClickListener{
         }
 
         Toast.makeText(cntApp,msgText.toString(),Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void setFragment(Fragment newFragment){
+        FragmentTransaction fTrn = getFragmentManager().beginTransaction();
+
+        if (frCurrent!= null) {
+            fTrn.remove(frCurrent);
+            frCurrent = null;
+        }
+
+        /*
+        if (frCurrent == frOk &&  newFragment == frMain)
+            frMain.clearEmail();
+
+        if (newFragment == frMain)
+            frMain.doSendDisaible();
+        */
+        fTrn.add(R.id.fl_FragmentCont,newFragment);
+        frCurrent = newFragment;
+
+        fTrn.commit();
+
+    }
+
+    @Override
+    public void onFragmentClosed() {
+        setFragment(frMain);
+    }
+
+    @Override
+    public void onFragmentAction(String data) {
+
+        sendEmail( data );
+
     }
 }

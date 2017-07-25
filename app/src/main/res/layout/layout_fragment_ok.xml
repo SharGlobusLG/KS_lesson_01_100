@@ -18,7 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/bt_ok_ico" />
+        app:srcCompat="@drawable/bt_ok_ico"
+        android:src="@drawable/bt_ok_ico"/>
+
 
     <Button
         android:id="@+id/bt_Ok"
